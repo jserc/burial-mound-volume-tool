@@ -1,6 +1,8 @@
 # burial-mound-volume-tool
 
-Tool to aid estimation of burial mound volume based on photographs.
+Tool to aid estimation of burial mound volume based on photographs. The current iteration of the tool allows you to plot a table of coordinates following the curve of the mound.
+
+Postprocessing (currently done in Excel) is used to generate approximation of the curvature of the mound (using linest polynomial coefficents to model trendline of the coordinates) of which is used to estimate volume using the cylindrical shells method (rotate around y axis).
 
 ### Installing and running
 
@@ -20,15 +22,23 @@ Steps to get running:
 	viii. Either copy and paste table into excel or select the export to CSV button (currently not working in some cases) <br />
 5. Repeat process with each mount.
 
+Postprocessing steps (to be turned into VBA code before actually run):
+
+1. Open excel file with x y coords
+2. Use Linest to calculate polynomial coefficients of a trendline of the xy data
+3. Use cylindrical shells method to estimate volume of mound.
+
 ## To do list (functionality)
 In priority order:
 
 1. Get the export to .csv function working consistantly
-2. Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name)
+2. Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name). Naming of photos will be fixed as part of this process.
+3. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data in excel)
 
 ## To do list (testing)
 
 1. Check works with different browsers
+2. Do comparison test with mounds modelled from 0.5m or less LIDAR data so we can estimate margin of error. Calculate exact volume using GRASS.
 
 ## Built With
 
