@@ -31,9 +31,10 @@ Postprocessing steps (to be turned into VBA code before actually run):
 ## To do list (functionality)
 In priority order:
 
-1. Get the export to .csv function working consistantly
-2. Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name). Naming of photos will be fixed as part of this process.
-3. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data in excel)
+1. Replace initial 4 clicks with popup prompts and add instruction and examples within the popups.
+2. Get the export to .csv function working consistantly
+3. Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name). Naming of photos will be fixed as part of this process.
+4. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data in excel)
 
 ## To do list (testing)
 
