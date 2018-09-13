@@ -29,7 +29,6 @@ In priority order:
 ## To do list (testing)
 
 1. Check works with different browsers
-2. 
 
 ## Built With
 
