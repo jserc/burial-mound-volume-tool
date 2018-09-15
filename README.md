@@ -8,40 +8,32 @@ Postprocessing (currently done in Excel) is used to generate approximation of th
 
 Steps to get running:
 
-Part A - [Process Image Tool] (https://jserc.github.io/burial-mound-volume-tool/PART_A_ProcessImagesTool.html)
-Part a can also be run directly from within a downloaded repository for offline use.
-
-1. Download repository.
-2. Copy one image of a mound into the root directory and rename it 1.jpg
-3. Click on index.html
-4. Process mound through the following steps: <br />
-	i. Type in height of human scale <br />
-	ii. Click no. 1 on feet of scale person <br />
-	iii. Click no. 2 on head of scale person <br />
-	iv. Click no. 3 on the centreline of the mound (to set x=0 to middle of mound) <br />
-	v. Click no. 4 somewhere along ground level (to set y=0 to base of mound) <br />
-	vi. Click a further 20 times along the curved surface of the mound. Start from the left and move to the right. This will automatically take you to the created table once all 20 clicks are done. <br />
-	vii. Review table to ensure it looks correct. <br />
-	viii. Either copy and paste table into excel or select the export to CSV button (currently not working in some cases) <br />
-5. Repeat process with each mount.
-
-Postprocessing steps (to be turned into VBA code before actually run):
-
-1. Open excel file with x y coords
-2. Use Linest to calculate polynomial coefficients of a trendline of the xy data
-3. Use cylindrical shells method to estimate volume of mound.
+**1. Run Part A: [Process Image Tool](https://jserc.github.io/burial-mound-volume-tool/PART_A_ProcessImagesTool.html)** - *(to use locally, file is [PART_A_ProcessImagesTool.html](PART_A_ProcessImagesTool.html))*  <br />
+	i. Import mound images individually <br />
+	ii. Follow the steps as directed within the web app<br />
+	ii. Export table and save to CSV file with unique mound identifier as the name eg. 8046.csv <br />
+**2. Run Part B: Post Processing Tool** - *(must be used locally, file is [PART_B_PostProcessingTool.xlsm](PART_B_PostProcessingTool.xlsm))*  <br />
+	i. Ensure [macros are enabled](https://support.office.com/en-us/article/enable-or-disable-macros-in-office-files-12b036fd-d140-4e74-b45e-16fed1a7e5c6) in the spreadheet <br />
+	ii. Follow instructions in tool to import and process data<br />
+	iii. Use Linest to calculate polynomial coefficients of a trendline of the xy data. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
+	iv. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
 
 ## To do list (functionality)
 In priority order:
 
-1. Replace initial 4 clicks with popup prompts and add instruction and examples within the popups.
-2. Get the export to .csv function working consistantly
-3. Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name). Naming of photos will be fixed as part of this process.
-4. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data in excel)
+1. ~~Replace initial 4 clicks with popup prompts and add instruction and examples within the popups.~~ 16/09/18 Complete
+2. Get the export to .csv function working consistantly - 16/09/18: inconsistantly working in some cases
+3. ~~Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name). Naming of photos will be fixed as part of this process.~~  16/09/18 Complete
+4. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data in excel)<br />
+	i. ~~Importing CSV en-mass import macro~~  16/09/18 Complete <br />
+	ii ~~Populate data summary macro~~  16/09/18 Complete <br />
+	iii. Use Linest to calculate polynomial coefficients of a trendline of the xy data. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
+	iv. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON) <br />
+	iv ~~Refresh data macro~~  16/09/18 Complete <br />
 
 ## To do list (testing)
 
-1. Check works with different browsers
+1. ~~Check works with different browsers~~  16/09/18 Complete <br />
 2. Do comparison test with mounds modelled from 0.5m or less LIDAR data so we can estimate margin of error. Calculate exact volume using GRASS.
 
 ## Built With
@@ -50,8 +42,8 @@ In priority order:
 
 ## License
 
-See the [LICENSE.md](LICENSE.md) file for details
+Any code that I wrote within this repository is licenced under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/). See the [LICENSE.md](LICENSE.md) file for details. Out of interest, I would appreciate if you let me know what project you are using this for if you are using this tool.
 
 ## Acknowledgments
 
-* Built for data collected with [FAIMS] (https://www.fedarch.org/about/) for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)
+* Built for data collected with [FAIMS](https://www.fedarch.org/about/) for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)
