@@ -8,12 +8,12 @@ Postprocessing (currently done in Excel) is used to generate approximation of th
 
 Steps to get running:
 
-1. Run Part A: [Process Image Tool] (https://jserc.github.io/burial-mound-volume-tool/PART_A_ProcessImagesTool.html) (to use locally, file is PART_A_ProcessImagesTool.html)  <br />
+**1. Run Part A: [Process Image Tool](https://jserc.github.io/burial-mound-volume-tool/PART_A_ProcessImagesTool.html)** - (to use locally, file is PART_A_ProcessImagesTool.html)  <br />
 	i. Import mound images individually <br />
 	ii. Follow the steps as directed within the web app<br />
 	ii. Export table and save to CSV file with unique mound identifier as the name eg. 8046.csv <br />
-2. Run Part B: Post Processing Tool - (must be used locally, file is PART_B_PostProcessingTool.xlsm)
-	i. Ensure [macros are enabled] (https://support.office.com/en-us/article/enable-or-disable-macros-in-office-files-12b036fd-d140-4e74-b45e-16fed1a7e5c6) in the spreadheet <br />
+**2. Run Part B: Post Processing Tool **- (must be used locally, file is PART_B_PostProcessingTool.xlsm)
+	i. Ensure [macros are enabled](https://support.office.com/en-us/article/enable-or-disable-macros-in-office-files-12b036fd-d140-4e74-b45e-16fed1a7e5c6) in the spreadheet <br />
 	ii. Follow instructions in tool to import and process data<br />
 	iii. Use Linest to calculate polynomial coefficients of a trendline of the xy data. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
 	iv. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
@@ -42,8 +42,8 @@ In priority order:
 
 ## License
 
-Any code that I wrote within this repository is licenced under [GNU GPLv3] (https://choosealicense.com/licenses/gpl-3.0/). See the [LICENSE.md](LICENSE.md) file for details. Out of interest, I would appreciate if you let me know what project you are using this for if you are using this tool.
+Any code that I wrote within this repository is licenced under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/). See the [LICENSE.md](LICENSE.md) file for details. Out of interest, I would appreciate if you let me know what project you are using this for if you are using this tool.
 
 ## Acknowledgments
 
-* Built for data collected with [FAIMS] (https://www.fedarch.org/about/) for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)
+* Built for data collected with [FAIMS](https://www.fedarch.org/about/) for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)
