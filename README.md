@@ -51,4 +51,4 @@ See the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Built for data collected and research undertaken as part of the [Tundzha Regional Archaeology Project](https://www.fedarch.org/about/)
+* Built for data collected with [FAIMS] (https://www.fedarch.org/about/) for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)

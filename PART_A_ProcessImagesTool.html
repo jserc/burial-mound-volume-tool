@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Burial Mound Volume Tool - Part A Process Images Tool</title>
+<script type="text/javascript" src="Backend\jquery-1.7.2.min.js" ></script>
+<script type="text/javascript" src="Backend\html2csv.js" ></script>
+  <style>
+  * {
+   margin: 10;
+   padding: 10;
+  }
+  .imgbox {
+   display: grid;
+  }
+  .center-fit {
+   max-width: 80%;
+   height: auto;
+   margin: auto;
+  }
+  </style>
+</head>
+<body>
+<b> <big> Burial Mound Volume Tool: Part A - Process Image Webapp </big> </b>  <br />
+
+<i>This webapp is Part A of the tool and is used to find the coordinates of the curvature of a burial mound from a human scaled image and export it to a .CSV file for postprocessing in Part B of the tool. </i>
+ <br /> <br />
+
+<b>Step 1:</b> <input type='file' id="imgInp" />
+<b>Step 2: </b> <button onclick="startProcessing()" id="ProcessingButton">Start Processing</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<b>Restart: </b> <button onclick="reloadpage()" id="ProcessingButton">Restart Tool</button>
+
+
+ <br /> <br />
+ 
+<div class="imgbox">
+	<form id="form1" runat="server">
+		<img class="center-fit" id="moundimage" src="#" alt="Please upload an image" longdesc="Burial Mound Image" />
+	</form>
+</div>
+
+ <br /> <br />
+<b> Raw Processing Input Data: </b>
+<form name="Show" id "debugform">
+	X <input type="text" name="Xcord" value="0" size="5"><br>
+	Y <input type="text" name="Ycord" value="0" size="5"><br>
+	Clickx <input type="text" name="Clickx" value="0" size="5"><br>
+	Clicky <input type="text" name="Clicky" value="0" size="5"><br>
+	Clickc <input type="text" name="Clickc" value="0" size="5"><br>
+	height <input type="text" name="height" value="0" size="5"><br>
+	ratio <input type="text" name="ratio" value="0" size="5"><br>
+</form>
+
+
+<script language="JavaScript">
+
+var height;
+
+// check if jquery is correcly loading
+window.onload = function() {
+    if (window.jQuery) {  
+        // jQuery is loaded  
+
+    } else {
+        // jQuery is not loaded
+        alert("jQuery does not loaded. As a result, this whole tool will not work properly. Please ensure jquery-1.7.2.min.js file is inside the /backend subfolder");
+    }
+
+
+}
+
+
+//GET CORDINATES OF MOUSE
+var height;
+var tempx=0;
+var tempy=0;
+var tempC=1;
+var cellsx = new Array();
+var cellsy = new Array();
+var ratio=1;
+var cellnumber=0;
+var cellxcord=0;
+var cellycord=0;
+var scrollcount=0;
+var xoffset=0;
+var yoffset=0;
+
+// reset all values to 0
+
+// wraps all the functionality after opening file so it doesnt run to begin with.
+function startProcessing(e) {
+	// set all values to 0 (in case something screwed up otherwise)
+	var w;
+	for (w = 0; w <= 24; w++) {
+		cellsx[w] = 0;
+		cellsy[w] = 0;
+	}
+
+
+	
+	height=prompt("Please enter the scale person's height (m):","0");
+	InitAlert();
+	document.Show.height.value=height;
+	document.onmousemove=getCord;
+	document.onscroll=checkScrollAlert;
+	document.onmousedown=getClick;
+
+
+}
+
+
+
+
+function checkScrollAlert(e) {
+		scrollcount++;
+		if (scrollcount == 1){
+			alert("Please dont scroll the window after the first click when starting processing as it causes issues with coordinate selection");
+		}
+		if (scrollcount == 40){
+			alert("Please dont scroll the window after the first click when starting processing as it causes issues with coordinate selection");
+		}
+}
+//initial prompt for user to know what to do
+function InitAlert(e) {
+		alert("Please select the base of the scale person's feet.");
+}
+
+//GET COORDINATE VALUE AND ASSIGN TO TEMPX AND TEMPY
+
+function getCord(e) {
+		tempX = e.pageX;
+		tempY = e.pageY;
+		if (tempX < 0){tempX = Invalid;}
+		if (tempY < 0){tempY = Invalid;}  
+		document.Show.Xcord.value = tempX;
+		document.Show.Ycord.value = tempY;
+}
+
+// Get click location and write it to the table
+
+function getClick(e) {
+		document.Show.Clickx.value=tempX;
+		document.Show.Clicky.value=tempY;
+		document.Show.Clickc.value=tempC;
+		// Prompt user about which steps they are up to
+		if (tempC == 1){
+			alert("Please select the top of the scale person's head.");
+			tempC == 1
+		} else if (tempC == 2){
+			alert("Please click on the centreline of the mound.");
+			tempC == 2
+		} else if (tempC == 3){
+			alert("Please click on the base of the mound (ground level).");
+			tempC = 3
+		} else if (tempC == 4){
+			alert("Starting from the left side of the mound please click 20 times over the curve of the mound. The clicks should end at the right side of the mound at ground level.");
+			tempC == 4	
+		}
+	
+		if (tempC > 4){
+			ratio=-((cellsy[2]-cellsy[1])/height);
+			xoffset=cellsx[3];
+			yoffset=cellsy[4];
+			cellsx[tempC] = (e.pageX-xoffset)/ratio;
+			cellsy[tempC] = -(e.pageY-yoffset)/ratio;
+			
+			
+		} else {
+			cellsx[tempC] = e.pageX;
+			cellsy[tempC] = e.pageY;	
+		}
+		
+		document.Show.ratio.value=ratio;
+	
+		tempC++;
+		document.Show.Clickc.value=tempC;
+		
+		// write table after all the clicks are done
+		if (tempC == 25) {
+			writeTable(cellsx, cellsy);
+		}
+		
+
+							  
+}
+
+//Write table 
+function writeTable(cellsx, cellsy) {
+	document.write('<center><table id="MoundValues" width="20" border="0">');
+
+	var i;
+	//loop for columns
+	for (i = 5; i <= 24; i++)
+	{
+		document.write('<td>' + cellsx[i] + '</td>');
+		document.write('<td>' + cellsy[i]+ '</td>');
+		document.write('</tr>');
+	}
+	document.write('</table></center>');
+
+	document.write('<a href="#" id="xx" style="text-decoration:none;color:#000;background-color:#ddd;border:1px solid #ccc;padding:8px;">Export Table data into Excel</a>');
+	document.write('<br /> ');
+	document.write('<br /> ');
+	document.write('If this button doesnt work then just copy and paste into excel and save as a CSV. Name the file with the mount identifier eg. 8034.csv');
+	document.write('<br /> <br /> <b>Restart Tool:</b> <button onclick="reloadpage()" id="ProcessingButton">Restart Tool</button>');
+	
+}
+
+// reads URL that was selected.
+function readURL(input) {
+
+// sourced from https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded/4459419#4459419 - Ivan Baev's comment on Stack Overflow 
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#moundimage').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
+
+function reloadpage(e) {
+	location.reload();
+}
+
+
+
+</script>
+</body>
+</html>
