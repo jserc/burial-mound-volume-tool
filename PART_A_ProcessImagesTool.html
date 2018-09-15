@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Burial Mound Volume Tool - Part A Process Images Tool</title>
-<script type="text/javascript" src="Backend\jquery-1.7.2.min.js" ></script>
+<script type="text/javascript" src="Backend\jquery-git.js" ></script>
 <script type="text/javascript" src="Backend\html2csv.js" ></script>
+
   <style>
   * {
    margin: 10;
@@ -28,18 +29,18 @@
 
 <b>Step 1:</b> <input type='file' id="imgInp" />
 <b>Step 2: </b> <button onclick="startProcessing()" id="ProcessingButton">Start Processing</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-<b>Restart: </b> <button onclick="reloadpage()" id="ProcessingButton">Restart Tool</button>
+<b>Restart: </b> <button onclick="reloadpage()" id="RestartButton">Restart Tool</button>
 
 
  <br /> <br />
  
 <div class="imgbox">
 	<form id="form1" runat="server">
-		<img class="center-fit" id="moundimage" src="#" alt="Please upload an image" longdesc="Burial Mound Image" />
+		<img class="center-fit" id="moundimage" src="#" alt="Please upload an image to begin" longdesc="Burial Mound Image" />
 	</form>
 </div>
 
- <br /> <br />
+<br /> <br />
 <b> Raw Processing Input Data: </b>
 <form name="Show" id "debugform">
 	X <input type="text" name="Xcord" value="0" size="5"><br>
@@ -50,6 +51,7 @@
 	height <input type="text" name="height" value="0" size="5"><br>
 	ratio <input type="text" name="ratio" value="0" size="5"><br>
 </form>
+
 
 
 <script language="JavaScript">
@@ -84,6 +86,9 @@ var cellycord=0;
 var scrollcount=0;
 var xoffset=0;
 var yoffset=0;
+
+
+
 
 // reset all values to 0
 
@@ -184,25 +189,38 @@ function getClick(e) {
 							  
 }
 
+
+
 //Write table 
 function writeTable(cellsx, cellsy) {
-	document.write('<center><table id="MoundValues" width="20" border="0">');
-
+	
+	document.write('<scr'+'ipt type="text/javascri'+'pt" src="Backend\\jquery-git.js" ></scr'+'ipt>');
+	document.write('<scr'+'ipt type="text/javascri'+'pt" src="Backend\\html2csv.js" ></scr'+'ipt>');
+	document.write('<div id="dvData">');
+	document.write('<center><table id="projectSpreadsheet" width="20" border="0">');
+	
+	
+	document.write('<tbody id="tbodyid">');
 	var i;
 	//loop for columns
 	for (i = 5; i <= 24; i++)
 	{
+		document.write('<tr>');
 		document.write('<td>' + cellsx[i] + '</td>');
 		document.write('<td>' + cellsy[i]+ '</td>');
 		document.write('</tr>');
 	}
-	document.write('</table></center>');
+	
 
-	document.write('<a href="#" id="xx" style="text-decoration:none;color:#000;background-color:#ddd;border:1px solid #ccc;padding:8px;">Export Table data into Excel</a>');
+	
+	document.write('</tbody>');
+	document.write('</table></center>');
+	document.write('</div>');
+	document.write('<a href="#" class="export">Export Table data into Excel</a>');
 	document.write('<br /> ');
 	document.write('<br /> ');
 	document.write('If this button doesnt work then just copy and paste into excel and save as a CSV. Name the file with the mount identifier eg. 8034.csv');
-	document.write('<br /> <br /> <b>Restart Tool:</b> <button onclick="reloadpage()" id="ProcessingButton">Restart Tool</button>');
+	document.write('<br /> <br /> <b>Restart Tool:</b> <button onclick="reloadpage()" id="RestartButton">Restart Tool</button>');
 	
 }
 
@@ -230,6 +248,8 @@ $("#imgInp").change(function() {
 function reloadpage(e) {
 	location.reload();
 }
+
+
 
 
 

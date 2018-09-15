@@ -1,55 +1,83 @@
-//Most of code sourced from Stackoverflow: https://stackoverflow.com/questions/7161113/how-do-i-export-html-table-data-as-csv-file through comment by user Michael Singer
+$(document).ready(function() {
 
-function exportTableToCSV($table,filename) {
+  function exportTableToCSV($table, filename) {
 
-    var $rows = $table.find('tr:has(td),tr:has(th)'),
+    var $rows = $table.find('tr:has(td)'),
 
-        // Temporary delimiter characters unlikely to be typed by keyboard
-        // This is to avoid accidentally splitting the actual contents
-        tmpColDelim = String.fromCharCode(11), // vertical tab character
-        tmpRowDelim = String.fromCharCode(0), // null character
+      // Temporary delimiter characters unlikely to be typed by keyboard
+      // This is to avoid accidentally splitting the actual contents
+      tmpColDelim = String.fromCharCode(11), // vertical tab character
+      tmpRowDelim = String.fromCharCode(0), // null character
 
-        // actual delimiter characters for CSV format
-        colDelim = '","',
-        rowDelim = '"\r\n"',
+      // actual delimiter characters for CSV format
+      colDelim = '","',
+      rowDelim = '"\r\n"',
 
-        // Grab text from table into CSV formatted string
-        csv = '"' + $rows.map(function (i, row) {
-            var $row = $(row), $cols = $row.find('td,th');
+      // Grab text from table into CSV formatted string
+      csv = '"' + $rows.map(function(i, row) {
+        var $row = $(row),
+          $cols = $row.find('td');
 
-            return $cols.map(function (j, col) {
-                var $col = $(col), text = $col.text();
+        return $cols.map(function(j, col) {
+          var $col = $(col),
+            text = $col.text();
 
-                return text.replace(/"/g, '""'); // escape double quotes
+          return text.replace(/"/g, '""'); // escape double quotes
 
-            }).get().join(tmpColDelim);
+        }).get().join(tmpColDelim);
 
-        }).get().join(tmpRowDelim)
-            .split(tmpRowDelim).join(rowDelim)
-            .split(tmpColDelim).join(colDelim) + '"',
+      }).get().join(tmpRowDelim)
+      .split(tmpRowDelim).join(rowDelim)
+      .split(tmpColDelim).join(colDelim) + '"';
 
+    // Deliberate 'false', see comment below
+    if (false && window.navigator.msSaveBlob) {
 
+      var blob = new Blob([decodeURIComponent(csv)], {
+        type: 'text/csv;charset=utf8'
+      });
 
-        // Data URI
-        csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+      // Crashes in IE 10, IE 11 and Microsoft Edge
+      // See MS Edge Issue #10396033
+      // Hence, the deliberate 'false'
+      // This is here just for completeness
+      // Remove the 'false' at your own risk
+      window.navigator.msSaveBlob(blob, filename);
 
-        console.log(csv);
+    } else if (window.Blob && window.URL) {
+      // HTML5 Blob        
+      var blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8'
+      });
+      var csvUrl = URL.createObjectURL(blob);
 
-        if (window.navigator.msSaveBlob) { // IE 10+
-            //alert('IE' + csv);
-            window.navigator.msSaveOrOpenBlob(new Blob([csv], {type: "text/plain;charset=utf-8;"}), "csvname.csv")
-        } 
-        else {
-            $(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
-        }
-}
+      $(this)
+        .attr({
+          'download': filename,
+          'href': csvUrl
+        });
+    } else {
+      // Data URI
+      var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
-// This must be a hyperlink
-$("#xx").on('click', function (event) {
+      $(this)
+        .attr({
+          'download': filename,
+          'href': csvData,
+          'target': '_blank'
+        });
+    }
+  }
 
-    exportTableToCSV.apply(this, [$('#MoundValues'), 'export.csv']);
+  // This must be a hyperlink
+  $(".export").on('click', function(event) {
+    // CSV
+    var args = [$('#dvData>table'), 'export.csv'];
 
-    // IF CSV, don't do event.preventDefault() or return false
+    exportTableToCSV.apply(this, args);
+
+    // If CSV, don't do event.preventDefault() or return false
     // We actually need this to be a typical hyperlink
+  });
 });
 

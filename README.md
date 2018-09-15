@@ -8,6 +8,9 @@ Postprocessing (currently done in Excel) is used to generate approximation of th
 
 Steps to get running:
 
+Part A - [Process Image Tool] (https://jserc.github.io/burial-mound-volume-tool/PART_A_ProcessImagesTool.html)
+Part a can also be run directly from within a downloaded repository for offline use.
+
 1. Download repository.
 2. Copy one image of a mound into the root directory and rename it 1.jpg
 3. Click on index.html
