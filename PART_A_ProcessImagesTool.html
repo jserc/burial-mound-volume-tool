@@ -36,7 +36,7 @@
  
 <div class="imgbox">
 	<form id="form1" runat="server">
-		<img class="center-fit" id="moundimage" src="#" alt="Please upload an image to begin" longdesc="Burial Mound Image" />
+		<img class="center-fit" id="moundimage" src="#" onerror="this.src='backend/Instructions.jpg'" alt="Please upload a burial mound image using the Choose File button prior to selecting the Start Processing button" longdesc="Burial Mound Image" />
 	</form>
 </div>
 
@@ -216,10 +216,10 @@ function writeTable(cellsx, cellsy) {
 	document.write('</tbody>');
 	document.write('</table></center>');
 	document.write('</div>');
-	document.write('<a href="#" class="export">Export Table data into Excel</a>');
+	document.write('<b> Step 3: </b><a href="#" class="export">Export Table data into Excel</a>');
 	document.write('<br /> ');
 	document.write('<br /> ');
-	document.write('If this button doesnt work then just copy and paste into excel and save as a CSV. Name the file with the mount identifier eg. 8034.csv');
+	document.write('<i>There is some issues with the export function currently. If this button doesnt work then just copy and paste the above table into excel and save as a CSV. Name the file with the mount identifier eg. 8034.csv </i>');
 	document.write('<br /> <br /> <b>Restart Tool:</b> <button onclick="reloadpage()" id="RestartButton">Restart Tool</button>');
 	
 }
