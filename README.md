@@ -1,8 +1,6 @@
 # burial-mound-volume-tool
 
-Tool to aid estimation of burial mound volume based on photographs. The current iteration of the tool allows you to plot a table of coordinates following the curve of the mound.
-
-Postprocessing (currently done in Excel) is used to generate approximation of the curvature of the mound (using linest polynomial coefficents to model trendline of the coordinates) of which is used to estimate volume using the cylindrical shells method (rotate around y axis).
+Tool to aid estimation of burial mound volume based on photographs. The current iteration of the tool allows you to plot a table of coordinates following the horizon of the mound. Postprocessing (currently done in Excel) is used to generate an approximation of the horizon of the mound (using linest polynomial coefficents to model trendline of the coordinates) of which is used to estimate mound volume using the cylindrical shells method (rotate around y axis). This volume value is to be used in research into burial mound construction methodology.
 
 ### Installing and running
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,18 +13,39 @@
   }
   .imgbox {
    display: grid;
+
   }
-  .center-fit {
+  .insidewrap {
+    width:100%; height:100%; 
+    position:relative;
+
+  }
+  .center-fit {	
    max-width: 80%;
+   width:80%;
+   position:absolute; top:0px;
    height: auto;
-   margin: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
+   .center-fit-canvas {	
+   max-width: 80%;
+   width:80%;
+   position:absolute; top:0px;
+   height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  
+
   </style>
 </head>
 <body>
 <b> <big> Burial Mound Volume Tool: Part A - Process Image Webapp </big> </b>  <br />
 
-<i>This webapp is Part A of the tool and is used to find the coordinates of the curvature of a burial mound from a human scaled image and export it to a .CSV file for postprocessing in Part B of the tool. </i>
+<i>This webapp is Part A of the tool and is used to find the coordinates of the horizon of a burial mound from a human scaled image and export it to a .CSV file for postprocessing in Part B of the tool. </i><br />
+ <i> Please ensure your webpage zoom is set to 100% and please do not scroll the page during the selection of the point locations. </i>
  <br /> <br />
 
 <b>Step 1:</b> <input type='file' id="imgInp" />
@@ -35,9 +56,10 @@
  <br /> <br />
  
 <div class="imgbox">
-	<form id="form1" runat="server">
+	<div class="insidewrap">
 		<img class="center-fit" id="moundimage" src="#" onerror="this.src='Backend/Instructions.jpg'" alt="Please upload a burial mound image using the Choose File button prior to selecting the Start Processing button" longdesc="Burial Mound Image" />
-	</form>
+		<canvas id="canvas" class="center-fit-canvas" height="1000" style="cursor:crosshair"></canvas>
+	</div>
 </div>
 
 <br /> <br />
@@ -158,7 +180,7 @@ function getClick(e) {
 			alert("Please click on the base of the mound (ground level).");
 			tempC = 3
 		} else if (tempC == 4){
-			alert("Starting from the left side of the mound please click 20 times over the curve of the mound. The clicks should end at the right side of the mound at ground level.");
+			alert("Starting from the left side of the mound please click 20 times over the horizon of the mound. The clicks should end at the right side of the mound at ground level.");
 			tempC == 4	
 		}
 	
@@ -176,7 +198,6 @@ function getClick(e) {
 		}
 		
 		document.Show.ratio.value=ratio;
-	
 		tempC++;
 		document.Show.Clickc.value=tempC;
 		
@@ -249,8 +270,32 @@ function reloadpage(e) {
 	location.reload();
 }
 
+// https://ourcodeworld.com/articles/read/49/draw-points-on-a-canvas-with-javascript-html5 coordinate plotting tool adapted from tutorial from outcodeworld.com
+$("#canvas").click(function(e){
+     getPosition(e); 
+});
+
+var pointSize = 1;
+
+function getPosition(event){
+	// i needed to divide it by a set number in here to get it to work properly with the cancas for some reason.
+     var rect = canvas.getBoundingClientRect();
+     var x = (event.clientX - (rect.left))/4.4;
+     var y = (event.clientY - (rect.top))/4.39;
+        
+     drawCoordinates(x,y);
+}
+
+function drawCoordinates(x,y){	
+  	var ctx = document.getElementById("canvas").getContext("2d");
 
 
+  	ctx.fillStyle = "#000000"; // Red color
+
+    ctx.beginPath();
+    ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+    ctx.fill();
+}
 
 
 </script>
