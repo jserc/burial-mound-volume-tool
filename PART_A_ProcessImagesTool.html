@@ -9,7 +9,7 @@
   <style>
   * {
    margin: 10;
-   padding: 10;
+   padding: 0;
   }
   .imgbox {
    display: grid;
@@ -17,24 +17,34 @@
   }
   .insidewrap {
     width:100%; height:100%; 
-    position:relative;
+   position:absolute; top:130px;
 
   }
   .center-fit {	
-   max-width: 80%;
+   max-width: 100%;
    width:80%;
-   position:absolute; top:0px;
+   position:absolute; top:0px; left:0px;
    height: auto;
     margin-left: auto;
     margin-right: auto;
   }
    .center-fit-canvas {	
-   max-width: 80%;
+   max-width: 100%;
    width:80%;
-   position:absolute; top:0px;
+   position:absolute; top:0px; left:0px;
    height: auto;
     margin-left: auto;
     margin-right: auto;
+	background-color: rgba(255, 0, 0, 0);
+
+  }
+  
+    .debug-form {	
+
+   position:absolute; top:120px;
+   height: auto;
+    margin-left: auto;
+    right: 10%;
 
   }
   
@@ -58,13 +68,12 @@
 <div class="imgbox">
 	<div class="insidewrap">
 		<img class="center-fit" id="moundimage" src="#" onerror="this.src='Backend/Instructions.jpg'" alt="Please upload a burial mound image using the Choose File button prior to selecting the Start Processing button" longdesc="Burial Mound Image" />
-		<canvas id="canvas" class="center-fit-canvas" height="1000" style="cursor:crosshair"></canvas>
+		<canvas id="canvas" class="center-fit-canvas" height="1500" style="cursor:crosshair"></canvas>
 	</div>
 </div>
 
 <br /> <br />
-<b> Raw Processing Input Data: </b>
-<form name="Show" id "debugform">
+<form name="Show" class="debug-form" id "debugform">
 	X <input type="text" name="Xcord" value="0" size="5"><br>
 	Y <input type="text" name="Ycord" value="0" size="5"><br>
 	Clickx <input type="text" name="Clickx" value="0" size="5"><br>
@@ -108,9 +117,22 @@ var cellycord=0;
 var scrollcount=0;
 var xoffset=0;
 var yoffset=0;
-
-
-
+var pointSize = 3;
+var x;
+var y;
+var headx;
+var heady;
+var footx;
+var footy;
+var xaxis;
+var yaxis;
+var prevx;
+var prevy;
+var img 
+var canvasSetup 
+var ctx
+var img_width 
+var img_height
 
 // reset all values to 0
 
@@ -127,6 +149,15 @@ function startProcessing(e) {
 	
 	height=prompt("Please enter the scale person's height (m):","0");
 	InitAlert();
+		var img = document.getElementById('moundimage'); 
+		var canvasSetup = document.getElementById("canvas");
+		var ctx = canvasSetup.getContext("2d");
+		var img_width = img.clientWidth;
+		var img_height = img.clientHeight;
+		canvas.width = img_width;
+		canvas.height = img_height;
+
+
 	document.Show.height.value=height;
 	document.onmousemove=getCord;
 	document.onscroll=checkScrollAlert;
@@ -150,6 +181,9 @@ function checkScrollAlert(e) {
 //initial prompt for user to know what to do
 function InitAlert(e) {
 		alert("Please select the base of the scale person's feet.");
+		
+				
+
 }
 
 //GET COORDINATE VALUE AND ASSIGN TO TEMPX AND TEMPY
@@ -169,13 +203,17 @@ function getClick(e) {
 		document.Show.Clickx.value=tempX;
 		document.Show.Clicky.value=tempY;
 		document.Show.Clickc.value=tempC;
+		
+
 		// Prompt user about which steps they are up to
 		if (tempC == 1){
+
 			alert("Please select the top of the scale person's head.");
-			tempC == 1
+			
 		} else if (tempC == 2){
 			alert("Please click on the centreline of the mound.");
 			tempC == 2
+			
 		} else if (tempC == 3){
 			alert("Please click on the base of the mound (ground level).");
 			tempC = 3
@@ -191,11 +229,19 @@ function getClick(e) {
 			cellsx[tempC] = (e.pageX-xoffset)/ratio;
 			cellsy[tempC] = -(e.pageY-yoffset)/ratio;
 			
-			
 		} else {
 			cellsx[tempC] = e.pageX;
 			cellsy[tempC] = e.pageY;	
 		}
+		
+
+
+		
+
+		x = event.offsetX;
+		y = event.offsetY;
+		drawCoordinates(x,y);
+
 		
 		document.Show.ratio.value=ratio;
 		tempC++;
@@ -271,30 +317,76 @@ function reloadpage(e) {
 }
 
 // https://ourcodeworld.com/articles/read/49/draw-points-on-a-canvas-with-javascript-html5 coordinate plotting tool adapted from tutorial from outcodeworld.com
-$("#canvas").click(function(e){
-     getPosition(e); 
-});
+//$("#canvas").click(function(e){
+//     getPosition(e); 
+//});
 
-var pointSize = 1;
 
-function getPosition(event){
-	// i needed to divide it by a set number in here to get it to work properly with the cancas for some reason.
-     var rect = canvas.getBoundingClientRect();
-     var x = (event.clientX - (rect.left))/4.4;
-     var y = (event.clientY - (rect.top))/4.39;
-        
-     drawCoordinates(x,y);
-}
+
+
 
 function drawCoordinates(x,y){	
+
   	var ctx = document.getElementById("canvas").getContext("2d");
 
 
   	ctx.fillStyle = "#000000"; // Red color
+	
+		if (tempC == 1) {
+				ctx.beginPath();
+					ctx.moveTo(x-20,y);
+					ctx.lineTo(x+20,y);
+				ctx.stroke();
+				ctx.beginPath();
+					ctx.moveTo(x,y-10);
+					ctx.lineTo(x,y);
+					ctx.lineTo(x+5,y-5);
+					ctx.lineTo(x,y);
+					ctx.lineTo(x-5,y-5);	
+				ctx.stroke();
+				
+		}
+		
+		if (tempC == 2) {
+				ctx.beginPath();
+				ctx.moveTo(x-20,y);
+				ctx.lineTo(x+20,y);
+				ctx.stroke();
+				ctx.beginPath();
+					ctx.moveTo(x,y+10);
+					ctx.lineTo(x,y);
+					ctx.lineTo(x+5,y+5);
+					ctx.lineTo(x,y);
+					ctx.lineTo(x-5,y+5);
+				ctx.stroke();				
+		}		
+		
+		if (tempC == 3) {
+				ctx.beginPath();
+				ctx.moveTo(x,y-5000);
+				ctx.lineTo(x,y+5000);
+				ctx.stroke();
 
-    ctx.beginPath();
-    ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
-    ctx.fill();
+		}	
+
+		if (tempC == 4) {
+
+				ctx.beginPath();
+				ctx.moveTo(x-5000,y);
+				ctx.lineTo(x+5000,y);
+				ctx.stroke();
+		
+		}
+		
+		if (tempC >4){
+
+			    ctx.beginPath();
+				ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+				ctx.fill();
+		}
+
+
+
 }
 
 
