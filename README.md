@@ -16,6 +16,10 @@ Steps to get running:
 	ii. Follow instructions in tool to import and process data<br />
 	iii. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
 
+### Testing
+
+A verification image is included in the example data so that the dimension calculation outputs can be verified.
+
 ## To do list (functionality)
 In priority order:
 
