@@ -20,7 +20,7 @@ Steps to get running:
 
 A verification image is included in the example data so that the dimension calculation outputs can be verified.
 
-## To do list (functionality)
+### To do list (functionality)
 In priority order:
 
 1. ~~Replace initial 4 clicks with popup prompts and add instruction and examples within the popups.~~ 16/09/18 Complete
@@ -34,20 +34,20 @@ In priority order:
 	iv ~~Refresh data macro~~  16/09/18 Complete <br />
 	v. Erosion volume calculations to be added <br />
 
-## To do list (testing)
+### To do list (testing)
 
 1. ~~Check works with different browsers~~  16/09/18 Complete <br />
 2. Do comparison test with mounds modelled from 0.5m or less LIDAR data so we can estimate margin of error. Calculate exact volume using GRASS.
 3. ~~create test image for confirmation of output calibration~~ 18/09/18 Complete
 
-## Built With
+### Built With
 
 * [jquery](https://jquery.com/) - export to csv function
 
-## License
+### License
 
 Any code that I wrote within this repository is licenced under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/), refer to the [LICENSE.md](LICENSE.md) file for details. All sample photographs are have been sourced and licenced seperately from the [Tundzha Regional Archaeology Project](http://www.tundzha.org/). Out of interest, I would appreciate if you let me know what you are working on if you use this tool.
 
-## Acknowledgments
+### Acknowledgments
 
 * Built for data collected with [FAIMS](https://www.fedarch.org/about/) and for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)
