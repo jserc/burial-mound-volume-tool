@@ -1,6 +1,6 @@
 # burial-mound-volume-tool
 
-Tool to aid estimation of burial mound volume based on photographs. The current iteration of the tool allows you to plot a table of coordinates following the horizon of the mound. Postprocessing (currently done in Excel) is used to generate an approximation of the horizon of the mound (using linest polynomial coefficents to model trendline of the coordinates) of which is used to estimate mound volume using the cylindrical shells method (rotate around y axis). This volume value is to be used in research into burial mound construction methodology.
+Tool to aid estimation of burial mound volume based on photographs with human scales. The current iteration of the tool allows you to plot a table of coordinates following the horizon of the mound and find horizon polynomial coefficents in excel. Postprocessing (currently done in Excel) is used to generate an approximation of the horizon of the mound (using linest polynomial coefficents to model trendline of the coordinates) of which is used to estimate mound volume using the cylindrical shells method (rotate around y axis). This volume value is to be used in research into burial mound construction methodology.
 
 ### Installing and running
 
@@ -42,7 +42,7 @@ In priority order:
 
 ## License
 
-Any code that I wrote within this repository is licenced under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/), refer to the [LICENSE.md](LICENSE.md) file for details. Out of interest, I would appreciate if you let me know what you are working on if you use this tool.
+Any code that I wrote within this repository is licenced under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/), refer to the [LICENSE.md](LICENSE.md) file for details. All sample photographs are have been sourced and licenced seperately from the [Tundzha Regional Archaeology Project](http://www.tundzha.org/). Out of interest, I would appreciate if you let me know what you are working on if you use this tool.
 
 ## Acknowledgments
 
