@@ -14,8 +14,7 @@ Steps to get running:
 **3. Run Part B: Post Processing Tool** - *(must be used locally, file is [PART_B_PostProcessingTool.xlsm](PART_B_PostProcessingTool.xlsm))*  <br />
 	i. Ensure [macros are enabled](https://support.office.com/en-us/article/enable-or-disable-macros-in-office-files-12b036fd-d140-4e74-b45e-16fed1a7e5c6) in the spreadheet <br />
 	ii. Follow instructions in tool to import and process data<br />
-	iii. Use Linest to calculate polynomial coefficients of a trendline of the xy data. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
-	iv. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
+	iii. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
 
 ## To do list (functionality)
 In priority order:
@@ -23,17 +22,19 @@ In priority order:
 1. ~~Replace initial 4 clicks with popup prompts and add instruction and examples within the popups.~~ 16/09/18 Complete
 2. Get the export to .csv function working consistantly - 16/09/18: inconsistantly working in some cases
 3. ~~Get a photo upload function working properly (either automatically cycle through photos and save .CSV with the same name if mound photos have a unique ID or allow user to select photos individually and choose output name). Naming of photos will be fixed as part of this process.~~  16/09/18 Complete
-4. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data in excel)<br />
+4. Build all postprocessing data calculations for mound volume in (rather then relying on postprocessing data manually)<br />
 	i. ~~Importing CSV en-mass import macro~~  16/09/18 Complete <br />
 	ii ~~Populate data summary macro~~  16/09/18 Complete <br />
-	iii. Use Linest to calculate polynomial coefficients of a trendline of the xy data. (TO BE ADDED IN SPREADSHEET VERY SOON)<br />
+	iii. ~~Use Linest to calculate polynomial coefficients of a trendline of the xy data.~~ 18/09/18 Complete <br />
 	iv. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON) <br />
 	iv ~~Refresh data macro~~  16/09/18 Complete <br />
+	v. Erosion volume calculations to be added <br />
 
 ## To do list (testing)
 
 1. ~~Check works with different browsers~~  16/09/18 Complete <br />
 2. Do comparison test with mounds modelled from 0.5m or less LIDAR data so we can estimate margin of error. Calculate exact volume using GRASS.
+3. ~~create test image for confirmation of output calibration~~ 18/09/18 Complete
 
 ## Built With
 
