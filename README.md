@@ -52,3 +52,4 @@ Any code that I wrote within this repository is licenced under [GNU GPLv3](https
 ### Acknowledgments
 
 * Built for data collected with [FAIMS](https://www.fedarch.org/about/) and for research undertaken as part of the [Tundzha Regional Archaeology Project](http://www.tundzha.org/)
+* JackBean from MrExcel forum for the trapezoid intergral function for excel
