@@ -26,15 +26,16 @@ In priority order:
 	i. ~~Importing CSV en-mass import macro~~  16/09/18 Complete <br />
 	ii ~~Populate data summary macro~~  16/09/18 Complete <br />
 	iii. ~~Use Linest to calculate polynomial coefficients of a trendline of the xy data.~~ 18/09/18 Complete <br />
-	iv. Use cylindrical shells method to estimate volume of mound. (TO BE ADDED IN SPREADSHEET VERY SOON) <br />
+	iv. ~~Use cylindrical shells method to estimate volume of mound.~~ 18/09/18 Complete  <br />
 	iv ~~Refresh data macro~~  16/09/18 Complete <br />
-	v. Erosion volume calculations to be added <br />
+	v. Erosion volume calculations to be added - SOMETIME IN FUTURE <br />
 
 ## To do list (testing)
 
 1. ~~Check works with different browsers~~  16/09/18 Complete <br />
 2. Do comparison test with mounds modelled from 0.5m or less LIDAR data so we can estimate margin of error. Calculate exact volume using GRASS.
 3. ~~create test image for confirmation of output calibration~~ 18/09/18 Complete
+4. ~~Have a volume comparison with a simplistic sepherical cap calculation (+-30% approx)~~ 18/09/18 Complete
 
 ## Built With
 
