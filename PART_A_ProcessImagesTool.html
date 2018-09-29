@@ -22,7 +22,7 @@
   }
   .center-fit {	
    max-width: 100%;
-   width:80%;
+   width:100%;
    position:absolute; top:0px; left:0px;
    height: auto;
     margin-left: auto;
@@ -30,7 +30,7 @@
   }
    .center-fit-canvas {	
    max-width: 100%;
-   width:80%;
+   width:100%;
    position:absolute; top:0px; left:0px;
    height: auto;
     margin-left: auto;
@@ -160,7 +160,8 @@ function startProcessing(e) {
 
 	document.Show.height.value=height;
 	document.onmousemove=getCord;
-	document.onscroll=checkScrollAlert;
+	// The current iteration seems to have solved the scroll issue for geometery - so this scroll alert function is no longer called. Zoom is still an issue but there seems to be no easy way of detecting zoom like there is scroll.
+	// document.onscroll=checkScrollAlert; 
 	document.onmousedown=getClick;
 
 
@@ -170,6 +171,7 @@ function startProcessing(e) {
 
 
 function checkScrollAlert(e) {
+		// The current iteration seems to have solved the scroll issue for geometery - so this function is no longer called. It is commented out above but retained here if it needs to be added in later.
 		scrollcount++;
 		if (scrollcount == 1){
 			alert("Please dont scroll the window after the first click when starting processing as it causes issues with coordinate selection");
@@ -283,10 +285,10 @@ function writeTable(cellsx, cellsy) {
 	document.write('</tbody>');
 	document.write('</table></center>');
 	document.write('</div>');
-	document.write('<b> Step 3: </b><a href="#" class="export">Export Table data into Excel</a>');
+	//document.write('<b> Step 3: </b><a href="#" class="export">Export Table data into Excel</a>');
 	document.write('<br /> ');
 	document.write('<br /> ');
-	document.write('<i>There is some issues with the export function currently. If this button doesnt work then just copy and paste the above table into excel and save as a CSV. Name the file with the mount identifier eg. 8034.csv </i>');
+	document.write('<i>Copy and paste the above table into excel and save as a CSV. Name the file with the mount identifier eg. 8034.csv. If the mound has been excavated or damaged then it should be processed a second time approximating the original mound horizon prior to damage, and the second files should be named 8034_estimate.csv. </i>');
 	document.write('<br /> <br /> <b>Restart Tool:</b> <button onclick="reloadpage()" id="RestartButton">Restart Tool</button>');
 	
 }
@@ -330,59 +332,143 @@ function drawCoordinates(x,y){
   	var ctx = document.getElementById("canvas").getContext("2d");
 
 
-  	ctx.fillStyle = "#000000"; // Red color
+  	ctx.fillStyle = "#000000"; 
 	
 		if (tempC == 1) {
+				ctx.lineWidth = 1;
 				ctx.beginPath();
 					ctx.moveTo(x-20,y);
 					ctx.lineTo(x+20,y);
+					ctx.strokeStyle = '#000000';
+					ctx.setLineDash([]); /*set no dash */
 				ctx.stroke();
 				ctx.beginPath();
+					ctx.moveTo(x-20,y);
+					ctx.lineTo(x+20,y);
+					ctx.setLineDash([5, 5]);/*dashes are 5px and spaces are 5px white dashes over black line*/
+					ctx.strokeStyle = '#FFFFFF';
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.setLineDash([]); /*set no dash */
+					ctx.strokeStyle = '#000000';
 					ctx.moveTo(x,y-10);
 					ctx.lineTo(x,y);
 					ctx.lineTo(x+5,y-5);
 					ctx.lineTo(x,y);
 					ctx.lineTo(x-5,y-5);	
 				ctx.stroke();
-				
+				ctx.lineWidth = 2;
+				ctx.setLineDash([]); /*set no dash for original black line*/
+				ctx.font = "10px Arial";
+				ctx.fillStyle = '#FFFFFF';
+				ctx.strokeStyle = '#000000';
+				ctx.strokeText("Feet",x-10,y+10);
+				ctx.fillText("Feet",x-10,y+10);
 		}
 		
 		if (tempC == 2) {
+				ctx.lineWidth = 1;
 				ctx.beginPath();
-				ctx.moveTo(x-20,y);
-				ctx.lineTo(x+20,y);
+					ctx.moveTo(x-20,y);
+					ctx.lineTo(x+20,y);
+					ctx.strokeStyle = '#000000';
 				ctx.stroke();
 				ctx.beginPath();
+					ctx.moveTo(x-20,y);
+					ctx.lineTo(x+20,y);
+					ctx.setLineDash([5, 5]);/*dashes are 5px and spaces are 5px white dashes over black line*/
+					ctx.strokeStyle = '#FFFFFF';
+				ctx.stroke();
+				ctx.beginPath();
+					ctx.setLineDash([]); /*set no dash*/
+					ctx.strokeStyle = '#000000';
 					ctx.moveTo(x,y+10);
 					ctx.lineTo(x,y);
 					ctx.lineTo(x+5,y+5);
 					ctx.lineTo(x,y);
 					ctx.lineTo(x-5,y+5);
-				ctx.stroke();				
+				ctx.stroke();	
+				ctx.lineWidth = 2;
+				ctx.setLineDash([]); /*set no dash for original black line*/
+				ctx.font = "10px Arial";
+				ctx.fillStyle = '#FFFFFF';
+				ctx.strokeStyle = '#000000';
+				ctx.strokeText("Head",x-10,y-5);
+				ctx.fillText("Head",x-10,y-5);
 		}		
 		
 		if (tempC == 3) {
+				ctx.lineWidth = 1;
+				ctx.setLineDash([]); /*set no dash for original black line*/
 				ctx.beginPath();
-				ctx.moveTo(x,y-5000);
-				ctx.lineTo(x,y+5000);
+					ctx.moveTo(x,y-5000);
+					ctx.lineTo(x,y+5000);
+					ctx.strokeStyle = '#000000';
 				ctx.stroke();
-
+				ctx.setLineDash([5, 5]);/*dashes are 5px and spaces are 5px white dashes over black line*/
+				ctx.beginPath();
+					ctx.moveTo(x,y-5000);
+					ctx.lineTo(x,y+5000);
+					ctx.strokeStyle = '#FFFFFF';
+				ctx.stroke();
+				ctx.lineWidth = 2;
+				ctx.setLineDash([]); /*set no dash for original black line*/
+				ctx.font = "10px Arial";
+				ctx.fillStyle = '#FFFFFF';
+				ctx.strokeStyle = '#000000';
+				ctx.strokeText("Centreline of mound",x-50,y+180);	
+				ctx.fillText("Centreline of mound",x-50,y+180);	
+	
 		}	
 
 		if (tempC == 4) {
-
+				ctx.lineWidth = 1;
+				ctx.setLineDash([]); /*set no dash for original black line*/
 				ctx.beginPath();
-				ctx.moveTo(x-5000,y);
-				ctx.lineTo(x+5000,y);
+					ctx.moveTo(x-5000,y);
+					ctx.lineTo(x+5000,y);
+					ctx.strokeStyle = '#000000';
 				ctx.stroke();
-		
+				ctx.setLineDash([5, 5]);/*dashes are 5px and spaces are 5px white dashes over black line*/
+				ctx.beginPath();
+					ctx.moveTo(x-5000,y);
+					ctx.lineTo(x+5000,y);
+					ctx.strokeStyle = '#FFFFFF';
+				ctx.stroke();
+				ctx.lineWidth = 2;
+				ctx.setLineDash([]); /*set no dash for original black line*/
+				ctx.font = "10px Arial";
+				ctx.fillStyle = '#FFFFFF';
+				ctx.strokeStyle = '#000000';
+				ctx.strokeText("Base of mound",x-280,y-5);
+				ctx.fillText("Base of mound",x-280,y-5);
 		}
 		
 		if (tempC >4){
-
+				ctx.lineWidth = 1;
+				ctx.setLineDash([]);
+				ctx.beginPath();
+					ctx.moveTo(x,y+10);
+					ctx.lineTo(x,y-10);
+					ctx.moveTo(x+10,y);
+					ctx.lineTo(x-10,y);
+					ctx.strokeStyle = '#000000';
+				ctx.stroke();	
 			    ctx.beginPath();
-				ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+					ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+					ctx.fillStyle = '#000000';
 				ctx.fill();
+				ctx.beginPath();
+					ctx.arc(x, y, pointSize-1.2, 0, Math.PI * 2, true);
+					ctx.fillStyle = '#FFFFFF';
+				ctx.fill();
+				ctx.lineWidth = 2;
+				ctx.setLineDash([]); /*set no dash for original black line*/
+				ctx.font = "10px Arial";
+				ctx.fillStyle = '#FFFFFF';
+				ctx.strokeStyle = '#000000';
+				ctx.strokeText(tempC-4,x-3,y-15);
+				ctx.fillText(tempC-4,x-3,y-15);
 		}
 
 
